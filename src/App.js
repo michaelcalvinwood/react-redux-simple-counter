@@ -1,8 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import store from './store/configureStore';
+import { increment, decrement } from './store/sliceValue';
 
 function App() {
-
+  console.log('store', store);
+  store.dispatch(increment({}))
+  console.log(store.getState());
 
   return (
     <div className="App">
