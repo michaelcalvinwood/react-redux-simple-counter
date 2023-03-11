@@ -1,22 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
-import store from './store/configureStore';
 import { increment, decrement } from './store/sliceValue';
-import { Provider } from “react-redux”
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function App() {
-  console.log('store', store);
-  store.dispatch(increment({}))
-  console.log(store.getState());
+  const [value, setValue] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(increment({}));
+  }, [])
 
   return (
-    <Provider store={store}>
       <div className="App">
-      <div style={{display: 'inline-block', marginRight: '.5rem', border: '1px solid blue', padding: '.25rem .5rem', cursor: 'pointer', borderRadius: '4px'}}>+</div>
-      <div style={{display: 'inline-block'}}>0</div>
-      <div style={{display: 'inline-block', marginLeft: '.5rem', border: '1px solid blue', padding: '.25rem .5rem', cursor: 'pointer', borderRadius: '4px'}}>-</div>
+        <div style={{display: 'inline-block', marginRight: '.5rem', border: '1px solid blue', padding: '.25rem .5rem', cursor: 'pointer', borderRadius: '4px'}}>+</div>
+        <div style={{display: 'inline-block'}}>{value}</div>
+        <div style={{display: 'inline-block', marginLeft: '.5rem', border: '1px solid blue', padding: '.25rem .5rem', cursor: 'pointer', borderRadius: '4px'}}>-</div>
       </div>
-    </Provider>
   );
 }
 
